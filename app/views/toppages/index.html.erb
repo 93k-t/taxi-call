@@ -1,6 +1,15 @@
 <!--トップページ-->
-<div class="text-center">
-  <h1>ようこそ！タクシーコールへ！</h1>
-  <!--ログイン機能追加-->
-  <p>登録がお済みで無い方は<%= link_to "こちら", signup_path %></p>
-</div>
+<% if logged_in? %>
+<!--ログイン完了時に表示-->
+  <div class="text-center">
+    <h1>ようこそ！<%= login_user.name %>さん！</h1>
+    <%= link_to "お客様ページ", user_path(login_user) %>
+  </div>
+  <% else %>
+<!--未ログイン時に表示-->
+  <div class="text-center">
+    <h1>ようこそ！タクシーコールへ！</h1>
+    <h2><%= link_to "ログイン", login_path %></h2>
+    <p>登録がお済みで無い方は<%= link_to "こちら", signup_path %></p>
+  </div>
+<% end %>

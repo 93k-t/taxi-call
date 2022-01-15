@@ -1,4 +1,12 @@
 <!--ユーザーページ-->
-<div class="text-center">
-  <h1>ようこそ！<%= @user.name %>さん！</h1>
-</div>
+<% if login_user.staff? %>
+<!--true の処理ユーザー側-->
+  <div class="text-center">
+    <h1>ようこそ！<%= @user.name %>さん！</h1>
+  </div>
+<% else %>
+<!--false の処理ドライバー側-->
+  <div class="text-center">
+    <h1>ようこそ！<%= @user.name %>さん！</h1>
+  </div>
+<% end %> 
