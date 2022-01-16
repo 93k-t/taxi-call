@@ -1,0 +1,15 @@
+<% if offers.any? %>
+  <ul class="list-unstyled mt-2">
+    <% offers.each do |offer| %>
+    <li class="d-flex">
+      <div>
+        <%= link_to offer.user.name, user_path(offer.user), class: "text-decoration-none" %><span class="text-muted">投稿日時<%= offer.created_at %></span>
+      </div>
+      <div>
+        <p><%= offer.offer_content %></p>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <%== pagy_bootstrap_nav(@pagy) %>
+<% end %>

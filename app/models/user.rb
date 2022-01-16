@@ -6,4 +6,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :staff,inclusion: [true,false]
   has_secure_password
+  
+  has_many :offers, dependent: :destroy
+  # has_many :comments
 end

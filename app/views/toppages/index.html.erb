@@ -3,7 +3,20 @@
 <!--ログイン完了時に表示-->
   <div class="text-center">
     <h1>ようこそ！<%= login_user.name %>さん！</h1>
-    <%= link_to "お客様ページ", user_path(login_user) %>
+    
+    <div class="row">
+      <aside class="col-sm-5">
+      <h2>タクシーを依頼する</h2>
+        <%= form_with(model: @offer) do |f| %>
+          <%= f.text_area :offer_content, class: "form-control", placeholder: "タクシーをご希望される場所、施設名をご記入ください" %>
+          <%= f.submit "タクシーをお願いする", class:"btn btn-primary w-100" %>
+        <% end %>
+      </aside>
+      <div class="col-sm-7">
+        <span>配車依頼日時 : <%= @offers.created_at %></span>
+        <p><%= @offers.offer_content %></p>
+      </div>
+    </div>
   </div>
   <% else %>
 <!--未ログイン時に表示-->

@@ -1,6 +1,7 @@
 <!--ユーザーページ-->
 <% if login_user.staff? %>
 <!--true の処理ユーザー側-->
+<div class="row">
   <div class="text-center">
     <h1>ようこそ！<%= @user.name %>さん！</h1>
   </div>
@@ -9,4 +10,6 @@
   <div class="text-center">
     <h1>ようこそ！<%= @user.name %>さん！</h1>
   </div>
-<% end %> 
+<% end %>
+<%= render "offers/offers", offers: @offer %>
+</div>

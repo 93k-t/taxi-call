@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @pagy, @offer = pagy(login_user.offers.order(id: :desc),item: 5)
   end
 
   def new
