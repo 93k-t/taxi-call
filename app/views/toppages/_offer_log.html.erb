@@ -1,0 +1,8 @@
+<!--配車履歴パーシャル-->
+  <% if offers.any? %>
+    <% offers.each do |offer| %>
+      <span>配車依頼日時 : <%= offer.created_at %></span>
+      <p>配車希望場所 : <%= offer.offer_content %></p>
+    <% end %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+  <% end %>

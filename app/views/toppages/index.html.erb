@@ -1,29 +1,49 @@
 <!--トップページ-->
-<% if logged_in? %>
 <!--ログイン完了時に表示-->
-  <div class="text-center">
-    <h1>ようこそ！<%= login_user.name %>さん！</h1>
-    
-    <div class="row">
-      <aside class="col-sm-5">
-      <h2>タクシーを依頼する</h2>
-        <%= form_with(model: @offer) do |f| %>
-          <%= f.text_area :offer_content, class: "form-control", placeholder: "タクシーをご希望される場所、施設名をご記入ください" %>
-          <%= f.submit "タクシーをお願いする", class:"btn btn-primary w-100" %>
-        <% end %>
-      </aside>
-      <div class="col-sm-7">
-        <h2>配車履歴</h2>
-        <span>配車依頼日時 : <%= @offers.created_at %></span>
-        <p>配車希望場所 : <%= @offers.offer_content %></p>
+<% if logged_in? %>
+  <!--true の処理ユーザー側-->
+  <% if login_user.staff? %>
+    <div class="text-center">
+      <h1>ようこそ！<%= login_user.name %>さん！</h1>
+      
+      <div class="row">
+        <aside class="col-sm-5">
+        <h2>タクシーを依頼する</h2>
+          <%= form_with(model: @offer) do |f| %>
+            <%= f.text_area :offer_content, class: "form-control", placeholder: "タクシーをご希望される場所、施設名をご記入ください" %>
+            <%= f.submit "タクシーをお願いする", class:"btn btn-primary w-100" %>
+          <% end %>
+        </aside>
+        <div class="col-sm-7">
+          <h2>配車履歴</h2>
+          <%= render "toppages/offer_log", offers: @offers %>
+        </div>
       </div>
     </div>
-  </div>
+  <!--false の処理ドライバー側-->
   <% else %>
+    <div class="text-center">
+      <h1>taxi <%= login_user.name %>さん！</h1>
+      
+      <div class="row">
+        <aside class="col-sm-5">
+        <h2>お客様へメッセージを送信する</h2>
+          <%= form_with(model: @offer) do |f| %>
+            <%= f.text_area :offer_content, class: "form-control", placeholder: "例:~時頃到着予定です。" %>
+            <%= f.submit "送信", class:"btn btn-primary w-100" %>
+          <% end %>
+        </aside>
+        <div class="col-sm-7">
+          <h2>依頼履歴</h2>
+          <%= render "toppages/offer_log", offers: @offers %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
 <!--未ログイン時に表示-->
   <div class="text-center">
     <h1>ようこそ！タクシーコールへ！</h1>
-    <h3>タクシーコールとは簡単操作でタクシーを手配できるWebサービスです！</h3>
     <h2><%= link_to "ログイン", login_path %></h2>
     <p>登録がお済みで無い方は<%= link_to "こちら", signup_path %></p>
   </div>

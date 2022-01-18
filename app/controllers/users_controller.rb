@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  # before_action :require_user_logged_in, only: [:index, :show]
   
-  def show
-    @user = User.find(params[:id])
-    @pagy, @offer = pagy(login_user.offers.order(id: :desc),item: 5)
-  end
+  # def show
+  #   @user = User.find(params[:id])
+  #   @pagy, @offers = pagy(login_user.offers.order(id: :desc),item: 5)
+  # end
 
   def new
     @user = User.new

@@ -2,8 +2,8 @@ class ToppagesController < ApplicationController
   def index
     if logged_in?
       @offer = login_user.offers.build
+      
+      @pagy, @offers = pagy(login_user.offers.order(id: :desc))
     end
-    @offers = Offer.last
-    # @pagy, @users = pagy(User.order(id: :desc),item: 5)
   end
 end

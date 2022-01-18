@@ -1,10 +1,11 @@
 class OffersController < ApplicationController
   def create
-    @offer = login_user.offers.build(offer_params)
-    if @offer.save
+    @offers = login_user.offers.build(offer_params)
+    if @offers.save
       flash[:success] = "タクシーを依頼しました。到着までしばらくお待ち下さい。"
       redirect_to root_url
     else
+      @pagy, @offers = pagy(login_user.offers.order(id: :desc))
       flash.now[:danger] = "メッセージが送信できませんでした。"
       render "toppages/index"
     end
