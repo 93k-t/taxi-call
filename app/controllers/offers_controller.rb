@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+  before_action :require_user_logged_in
+  
   def create
     @offers = login_user.offers.build(offer_params)
     if @offers.save
@@ -6,8 +8,9 @@ class OffersController < ApplicationController
       redirect_to root_url
     else
       @pagy, @offers = pagy(login_user.offers.order(id: :desc))
-      flash.now[:danger] = "メッセージが送信できませんでした。"
-      render "toppages/index"
+      flash[:danger] = "メッセージが送信できませんでした。"
+      # render "toppages/index"
+      redirect_to root_url
     end
   end
   

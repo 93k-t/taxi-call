@@ -4,7 +4,7 @@
   <!--true の処理ユーザー側-->
   <% if login_user.staff? %>
     <div class="text-center">
-      <h1>ようこそ！<%= login_user.name %>さん！</h1>
+      <h1>ユーザー側 :<%= login_user.name %></h1>
       
       <div class="row">
         <aside class="col-sm-5">
@@ -23,7 +23,7 @@
   <!--false の処理ドライバー側-->
   <% else %>
     <div class="text-center">
-      <h1>taxi <%= login_user.name %>さん！</h1>
+      <h1>タクシー側 :<%= login_user.name %></h1>
       
       <div class="row">
         <aside class="col-sm-5">
@@ -35,7 +35,7 @@
         </aside>
         <div class="col-sm-7">
           <h2>依頼履歴</h2>
-          <%= render "toppages/offer_log", offers: @offers %>
+          <%= render "toppages/offer_log", offers: @users_offer %>
         </div>
       </div>
     </div>

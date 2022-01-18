@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = "ご登録ありがとうございます！登録が完了致しました。"
-      redirect_to @user
+      redirect_to root_url
     else
       flash.now[:danger] = "登録に失敗しました。入力内容に誤りがないかご確認下さい。"
       render :new
